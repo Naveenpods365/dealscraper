@@ -1,35 +1,52 @@
-import { Search, Bell, User } from "lucide-react";
+import { Search, Bell, User, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export const Header = () => {
   return (
-    <header className="h-16 border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-10">
-      <div className="h-full px-6 flex items-center justify-between">
+    <header className="h-20 border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-10">
+      <div className="h-full px-8 flex items-center justify-between">
         {/* Welcome Text */}
-        <div>
-          <h1 className="text-xl font-semibold text-foreground">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">Welcome back! Here's your deals overview.</p>
+        <div className="animate-slide-down">
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+            <div className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-semibold flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+              Live
+            </div>
+          </div>
+          <p className="text-sm text-muted-foreground mt-1">Welcome back! Here's your deals overview.</p>
         </div>
 
         {/* Search & Actions */}
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <div className="flex items-center gap-4 animate-slide-down" style={{ animationDelay: '100ms' }}>
+          <div className="relative group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
             <Input
               placeholder="Search deals..."
-              className="pl-10 w-64 bg-background border-border focus:ring-primary"
+              className="pl-11 w-72 h-11 bg-background border-border rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
             />
+            <kbd className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-md hidden md:block">
+              ⌘K
+            </kbd>
           </div>
           
-          <Button variant="ghost" size="icon" className="relative">
+          <Button variant="ghost" size="icon" className="relative h-11 w-11 rounded-xl hover:bg-secondary">
             <Bell className="h-5 w-5 text-muted-foreground" />
-            <span className="absolute top-1 right-1 h-2 w-2 bg-accent rounded-full" />
+            <span className="absolute top-2 right-2 h-2.5 w-2.5 bg-accent rounded-full border-2 border-card animate-pulse" />
           </Button>
 
-          <Button variant="ghost" size="icon" className="rounded-full bg-secondary">
-            <User className="h-5 w-5 text-secondary-foreground" />
+          <Button className="h-11 gap-2 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+            <Sparkles className="h-4 w-4" />
+            <span className="font-semibold">New Deal</span>
           </Button>
+
+          <div className="relative">
+            <Button variant="ghost" size="icon" className="h-11 w-11 rounded-xl bg-gradient-to-br from-secondary to-muted overflow-hidden group">
+              <User className="h-5 w-5 text-secondary-foreground group-hover:scale-110 transition-transform" />
+            </Button>
+            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-success rounded-full border-2 border-card" />
+          </div>
         </div>
       </div>
     </header>
