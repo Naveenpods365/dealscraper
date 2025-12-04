@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DealCard } from "./DealCard";
 
@@ -31,21 +31,36 @@ const topDeals = [
 
 export const TopCategoriesSection = () => {
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-foreground">Top Categories</h3>
-        <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80 gap-1">
+    <div className="relative">
+      {/* Background decoration */}
+      <div className="absolute -top-20 left-1/4 w-60 h-60 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 right-1/4 w-60 h-60 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10">
+            <Sparkles className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-foreground">Top Categories</h3>
+            <p className="text-sm text-muted-foreground">Best performing deals this week</p>
+          </div>
+        </div>
+        <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80 gap-2 group">
           View All
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {topDeals.map((deal, index) => (
           <div
             key={index}
-            className="animate-slide-up"
-            style={{ animationDelay: `${index * 100}ms` }}
+            className="animate-slide-up opacity-0"
+            style={{ 
+              animationDelay: `${index * 100}ms`,
+              animationFillMode: 'forwards'
+            }}
           >
             <DealCard {...deal} />
           </div>
