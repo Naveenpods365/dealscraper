@@ -1,10 +1,8 @@
 import { 
   LayoutDashboard, 
-  TrendingUp, 
-  Package, 
-  Link2, 
+  Calendar, 
+  Ticket, 
   Settings, 
-  Bell,
   LogOut,
   Sparkles
 } from "lucide-react";
@@ -49,7 +47,7 @@ const NavItem = ({ icon, label, active, badge, delay = 0 }: NavItemProps) => (
 
 export const Sidebar = () => {
   return (
-    <aside className="w-72 h-screen bg-gradient-to-b from-sidebar via-sidebar to-sidebar/95 border-r border-sidebar-border flex flex-col relative overflow-hidden">
+    <aside className="w-72 h-screen bg-gradient-to-b from-sidebar via-sidebar to-sidebar/95 border-r border-sidebar-border flex flex-col relative overflow-hidden sticky top-0">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-sidebar-primary/10 rounded-full blur-3xl animate-pulse-glow" />
@@ -96,38 +94,20 @@ export const Sidebar = () => {
           delay={100}
         />
         <NavItem
-          icon={<TrendingUp size={20} />}
-          label="Analytics"
+          icon={<Calendar size={20} />}
+          label="Scheduler"
           delay={150}
         />
         <NavItem
-          icon={<Package size={20} />}
-          label="Deals"
-          badge={12}
+          icon={<Ticket size={20} />}
+          label="Coupons"
           delay={200}
         />
         <NavItem
-          icon={<Link2 size={20} />}
-          label="Affiliate Links"
+          icon={<Settings size={20} />}
+          label="Settings"
           delay={250}
         />
-        <NavItem
-          icon={<Bell size={20} />}
-          label="Notifications"
-          badge={3}
-          delay={300}
-        />
-        
-        <div className="pt-4 mt-4 border-t border-sidebar-border/50">
-          <p className="text-xs font-semibold text-sidebar-foreground/40 uppercase tracking-wider px-4 mb-3">
-            System
-          </p>
-          <NavItem
-            icon={<Settings size={20} />}
-            label="Settings"
-            delay={350}
-          />
-        </div>
       </nav>
 
       {/* Footer with animated card */}
