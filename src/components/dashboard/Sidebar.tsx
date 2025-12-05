@@ -6,44 +6,51 @@ import {
   LogOut,
   Sparkles
 } from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { cn } from "@/lib/utils";
 
 interface NavItemProps {
   icon: React.ReactNode;
   label: string;
-  active?: boolean;
+  to: string;
   badge?: number;
   delay?: number;
 }
 
-const NavItem = ({ icon, label, active, badge, delay = 0 }: NavItemProps) => (
-  <button
-    className={cn(
-      "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 group animate-slide-up",
-      active
-        ? "bg-gradient-to-r from-sidebar-primary/20 to-sidebar-accent text-sidebar-primary shadow-lg shadow-sidebar-primary/10"
-        : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground hover:translate-x-1"
-    )}
-    style={{ animationDelay: `${delay}ms` }}
-  >
-    <span className={cn(
-      "transition-transform duration-300",
-      active && "animate-bounce-soft"
-    )}>
-      {icon}
-    </span>
-    <span>{label}</span>
-    {badge && (
-      <span className="ml-auto bg-sidebar-primary text-sidebar-primary-foreground text-xs px-2.5 py-1 rounded-full font-bold animate-pulse-glow">
-        {badge}
+const NavItem = ({ icon, label, to, badge, delay = 0 }: NavItemProps) => {
+  const location = useLocation();
+  const active = location.pathname === to;
+  
+  return (
+    <NavLink
+      to={to}
+      className={cn(
+        "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 group animate-slide-up",
+        active
+          ? "bg-gradient-to-r from-sidebar-primary/20 to-sidebar-accent text-sidebar-primary shadow-lg shadow-sidebar-primary/10"
+          : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground hover:translate-x-1"
+      )}
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <span className={cn(
+        "transition-transform duration-300",
+        active && "animate-bounce-soft"
+      )}>
+        {icon}
       </span>
-    )}
-    {active && (
-      <Sparkles className="ml-auto h-4 w-4 text-sidebar-primary animate-spin-slow" />
-    )}
-  </button>
-);
+      <span>{label}</span>
+      {badge && (
+        <span className="ml-auto bg-sidebar-primary text-sidebar-primary-foreground text-xs px-2.5 py-1 rounded-full font-bold animate-pulse-glow">
+          {badge}
+        </span>
+      )}
+      {active && (
+        <Sparkles className="ml-auto h-4 w-4 text-sidebar-primary animate-spin-slow" />
+      )}
+    </NavLink>
+  );
+};
 
 export const Sidebar = () => {
   return (
@@ -90,22 +97,25 @@ export const Sidebar = () => {
         <NavItem
           icon={<LayoutDashboard size={20} />}
           label="Dashboard"
-          active
+          to="/"
           delay={100}
         />
         <NavItem
           icon={<Calendar size={20} />}
           label="Scheduler"
+          to="/scheduler"
           delay={150}
         />
         <NavItem
           icon={<Ticket size={20} />}
           label="Coupons"
+          to="/coupons"
           delay={200}
         />
         <NavItem
           icon={<Settings size={20} />}
           label="Settings"
+          to="/settings"
           delay={250}
         />
       </nav>
@@ -121,11 +131,13 @@ export const Sidebar = () => {
             Enable auto-scheduling to never miss a deal!
           </p>
         </div>
-        <NavItem
-          icon={<LogOut size={20} />}
-          label="Sign Out"
-          delay={400}
-        />
+        <button
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground hover:translate-x-1 animate-slide-up"
+          style={{ animationDelay: '400ms' }}
+        >
+          <LogOut size={20} />
+          <span>Sign Out</span>
+        </button>
       </div>
     </aside>
   );

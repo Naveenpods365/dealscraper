@@ -2,20 +2,25 @@ import { Search, Bell, User, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export const Header = () => {
+interface HeaderProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export const Header = ({ title = "Dashboard", subtitle = "Welcome back! Here's your deals overview." }: HeaderProps) => {
   return (
-    <header className="h-20 border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-10">
+    <header className="h-20 border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-20">
       <div className="h-full px-8 flex items-center justify-between">
         {/* Welcome Text */}
         <div className="animate-slide-down">
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+            <h1 className="text-2xl font-bold text-foreground">{title}</h1>
             <div className="px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-semibold flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
               Live
             </div>
           </div>
-          <p className="text-sm text-muted-foreground mt-1">Welcome back! Here's your deals overview.</p>
+          <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
         </div>
 
         {/* Search & Actions */}
