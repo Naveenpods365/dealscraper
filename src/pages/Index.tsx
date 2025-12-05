@@ -20,10 +20,10 @@ const Index = () => {
 
       <Sidebar />
       
-      <div className="flex-1 flex flex-col overflow-hidden relative">
+      <div className="flex-1 flex flex-col min-h-screen relative">
         <Header />
         
-        <main className="flex-1 overflow-y-auto p-8 space-y-8">
+        <main className="flex-1 p-8 space-y-8 overflow-y-auto">
           {/* Stats Row */}
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             <div className="animate-slide-up opacity-0" style={{ animationDelay: "0ms", animationFillMode: 'forwards' }}>
